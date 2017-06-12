@@ -33,10 +33,10 @@ const cli = meow(`
 
     -m, --maintenance
       How much of an effect should maintenance have on search results
-    
+
     -h, --help
       Show this message
-  
+
   Examples
     $ typesearch-cli react -q
 

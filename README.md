@@ -39,3 +39,8 @@ $ typesearch-cli angular
 @types/angular-strap
 @types/angular-idle
 ```
+
+## TODO
+
+- [ ] write test
+- [ ] Install from search result

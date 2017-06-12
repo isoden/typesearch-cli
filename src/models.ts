@@ -10,6 +10,13 @@ export interface TypeSearchParams {
   maintenance?: boolean
 }
 
+export enum NpmSearchCriteria {
+  BestOverall = 1,
+  Quality,
+  Popularity,
+  Maintenance,
+}
+
 export interface NpmSearchParams {
   /** full-text search to apply */
   text?: string

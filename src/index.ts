@@ -9,13 +9,14 @@ import 'rxjs/add/observable/fromPromise'
 import 'rxjs/add/operator/map'
 
 import {
-  TypeSearchParams,
+  NpmSearchCriteria,
   NpmSearchParams,
   NpmSearchResponse,
+  TypeSearchParams,
 } from './models'
 
 import {
-  // booleanify,
+  booleanify,
   switchMap,
 } from './utils'
 
@@ -57,24 +58,52 @@ const TypeSearch = {
   },
 
   normalizeParams(params: TypeSearchParams): NpmSearchParams {
-    // const toggleOptionalFlag = (enabled: boolean) => enabled ? 3 : 0
+    const { text, ...conditions } = params
+    const criteria = this.getCriteria(conditions)
 
     return <NpmSearchParams>switchMap(params, {
-      text(text: string) {
+      text() {
         return `scope:types ${ text }`
       },
-      // quality    : toggleOptionalFlag,
-      // popularity : toggleOptionalFlag,
-      // maintenance: toggleOptionalFlag,
+      quality() {
+        switch (criteria) {
+          case NpmSearchCriteria.BestOverall: return 1.95
+          case NpmSearchCriteria.Quality    : return 3
+          default                           : return 0
+        }
+      },
+      popularity() {
+        switch (criteria) {
+          case NpmSearchCriteria.BestOverall: return 3.3
+          case NpmSearchCriteria.Popularity : return 3
+          default                           : return 0
+        }
+      },
+      maintenance() {
+        switch (criteria) {
+          case NpmSearchCriteria.BestOverall: return 2.05
+          case NpmSearchCriteria.Maintenance: return 3
+          default                           : return 0
+        }
+      },
     })
+  },
+
+  getCriteria(params: Pick<TypeSearchParams, 'quality' | 'popularity' | 'maintenance'>): NpmSearchCriteria {
+    switch (true) {
+      case params.quality    : return NpmSearchCriteria.Quality
+      case params.popularity : return NpmSearchCriteria.Popularity
+      case params.maintenance: return NpmSearchCriteria.Maintenance
+      default                : return NpmSearchCriteria.BestOverall
+    }
   }
 }
 
 TypeSearch.search({
   text       : cli.input[0],
-  // quality    : booleanify(cli.flags.quality),
-  // popularity : booleanify(cli.flags.popularity),
-  // maintenance: booleanify(cli.flags.maintenance),
+  quality    : booleanify(cli.flags.quality),
+  popularity : booleanify(cli.flags.popularity),
+  maintenance: booleanify(cli.flags.maintenance),
 })
   .map(data => data.objects.map(object => object.package))
   .subscribe(packages => {

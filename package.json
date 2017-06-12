@@ -1,0 +1,30 @@
+{
+  "name": "typesearch-cli",
+  "bin": "bin/index.js",
+  "version": "1.0.0",
+  "description": "Command line tool that search TypeScript types.",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/isoden/typesearch-cli.git"
+  },
+  "keywords": [
+    "typescript"
+  ],
+  "author": "isoden <isoda@maboroshi.biz> (http://isoden.me)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/isoden/typesearch-cli/issues"
+  },
+  "homepage": "https://github.com/isoden/typesearch-cli#readme",
+  "dependencies": {
+    "@types/meow": "^3.6.2",
+    "@types/node": "^7.0.29",
+    "axios": "^0.16.2",
+    "meow": "^3.7.0",
+    "rxjs": "^5.4.0",
+    "tslib": "^1.7.1"
+  }
+}

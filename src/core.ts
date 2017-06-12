@@ -1,79 +1,26 @@
 'use strict'
 
 import axios from 'axios'
-import { Observable } from 'rxjs/Observable'
-import 'rxjs/add/observable/fromPromise'
-import 'rxjs/add/operator/map'
 
-import { switchMap } from './utils'
-
-export const search = (searchParams: TypeSearchCli.TypeSearchParams): Observable<TypeSearchCli.NpmSearchResponse> => {
+export const search = (searchParams: TypeSearchCli.TypeSearchParams): Promise<TypeSearchCli.NpmSearchResponse> => {
   const params  = normalizeParams(searchParams)
-  const request = axios.get(`https://www.npmjs.org/-/search`, { params })
 
-  return Observable.fromPromise(request)
-    .map(response => response.data as TypeSearchCli.NpmSearchResponse)
+  return axios.get(`https://www.npmjs.org/-/search`, { params })
+    .then(response => response.data as TypeSearchCli.NpmSearchResponse)
 }
 
 export const normalizeParams = (params: TypeSearchCli.TypeSearchParams): TypeSearchCli.NpmSearchParams => {
-  const { text, ...conditions } = params
-  const criteria = getCriteria(conditions)
-
-  return <TypeSearchCli.NpmSearchParams>switchMap(params, {
-    text() {
-      return `scope:types ${ text }`
-    },
-    quality() {
-      switch (criteria) {
-        case TypeSearchCli.NpmSearchCriteria.BestOverall: return 1.95
-        case TypeSearchCli.NpmSearchCriteria.Quality    : return 3
-        default                           : return 0
-      }
-    },
-    popularity() {
-      switch (criteria) {
-        case TypeSearchCli.NpmSearchCriteria.BestOverall: return 3.3
-        case TypeSearchCli.NpmSearchCriteria.Popularity : return 3
-        default                           : return 0
-      }
-    },
-    maintenance() {
-      switch (criteria) {
-        case TypeSearchCli.NpmSearchCriteria.BestOverall: return 2.05
-        case TypeSearchCli.NpmSearchCriteria.Maintenance: return 3
-        default                           : return 0
-      }
-    },
-  })
-}
-
-export const getCriteria = (
-  params: Pick<TypeSearchCli.TypeSearchParams, 'quality' | 'popularity' | 'maintenance'>
-): TypeSearchCli.NpmSearchCriteria => {
-  switch (true) {
-    case params.quality    : return TypeSearchCli.NpmSearchCriteria.Quality
-    case params.popularity : return TypeSearchCli.NpmSearchCriteria.Popularity
-    case params.maintenance: return TypeSearchCli.NpmSearchCriteria.Maintenance
-    default                : return TypeSearchCli.NpmSearchCriteria.BestOverall
+  return {
+    text       : `scope: types ${ params.text }`,
+    quality    : 1.95,
+    popularity : 3.3,
+    maintenance: 2.05,
   }
 }
 
 export namespace TypeSearchCli {
   export interface TypeSearchParams {
     text: string
-
-    quality?: boolean
-
-    popularity?: boolean
-
-    maintenance?: boolean
-  }
-
-  export enum NpmSearchCriteria {
-    BestOverall = 1,
-    Quality,
-    Popularity,
-    Maintenance,
   }
 
   /** {@link https://github.com/npm/registry/blob/master/docs/REGISTRY-API.md#get-v1search} */

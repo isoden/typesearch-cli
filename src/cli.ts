@@ -2,44 +2,32 @@
 
 import * as meow from 'meow'
 import { search } from './index'
-import { booleanify } from './utils'
 
 const cli = meow(`
   Usage
     $ typesearch-cli <PackageName>
 
   Options
-    -q, --quality
-      How much of an effect should quality have on search results
-
-    -p, --popularity
-      How much of an effect should popularity have on search results
-
-    -m, --maintenance
-      How much of an effect should maintenance have on search results
-
-    -h, --help
-      Show this message
+    -h, --help   : Show this message
+    -v, --version:  Show program version
 
   Examples
-    $ typesearch-cli react -q
-
+    $ typesearch-cli angular
+    @types/angular
+    @types/angular-ui-router
+    @types/angular-mocks
+    @types/angular-resource
+    ...
 `, {
   alias: {
-    q: 'quality',
-    p: 'popularity',
-    m: 'maintenance',
-  },
+    v: 'version',
+    h: 'help',
+  }
 })
 
-search({
-  text       : cli.input[0],
-  quality    : booleanify(cli.flags.quality),
-  popularity : booleanify(cli.flags.popularity),
-  maintenance: booleanify(cli.flags.maintenance),
-})
-  .map(data => data.objects.map(object => object.package))
-  .subscribe(packages => {
+search({ text: cli.input[0] })
+  .then(data => data.objects.map(object => object.package))
+  .then(packages => {
     packages.forEach(pkg => console.log(pkg.name))
   }, err => {
     console.log(err)

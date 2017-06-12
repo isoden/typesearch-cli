@@ -15,7 +15,8 @@
       "es2016"
     ],
     "types": [
-      "node"
+      "node",
+      "mocha"
     ]
   }
 }

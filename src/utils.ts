@@ -6,6 +6,7 @@ export const switchMap = <T extends object>(target: T, conditions: { [key: strin
   return Object.keys(target).reduce((memo, key: keyof typeof target) => {
     const fn = conditions[key]
     if (typeof fn !== 'function') {
+      memo[key] = target[key]
       return memo
     }
 

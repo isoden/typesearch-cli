@@ -18,5 +18,8 @@
       "node",
       "mocha"
     ]
-  }
+  },
+  "include": [
+    "src/*.ts"
+  ]
 }

@@ -1,7 +1,6 @@
 'use strict'
 
 import * as assert from 'power-assert'
-import * as sinon from 'sinon'
 import * as nock from 'nock'
 
 import { search } from '../src/core'

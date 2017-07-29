@@ -1,4 +1,5 @@
 #!/usr/bin/env node
+'use strict'
 
 import * as meow from 'meow'
 import * as npmInstallPackage from 'npm-install-package'

@@ -1,3 +1,5 @@
+'use strict'
+
 import * as Charm   from 'charm'
 import * as vw      from 'visualwidth'
 import * as ttys    from 'ttys'

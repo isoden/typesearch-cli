@@ -16,7 +16,13 @@ $ npm install typesearch-cli --global
 
 ## Usage
 
+### Basic
+
 ![](fixture/demo.gif)
+
+### Install selected package
+
+![](fixture/demo2.gif)
 
 ## Related
 

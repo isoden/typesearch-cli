@@ -25,3 +25,27 @@ declare module 'ttys' {
 
   export = ttys
 }
+
+declare module 'npm-install-package' {
+  interface Options {
+    /** save a value to dependencies. Defaults to false */
+    save: boolean
+
+    /** save a value to devDependencies. Defaults to false */
+    saveDev: boolean
+
+    /** attempt to get packages from the local cache first. Defaults to false */
+    cache: boolean
+
+    /** install packages silently without writing to stdout. Defaults to false */
+    silent: boolean
+  }
+  
+  interface NpmInstallPackage {
+    (deps: string | string[], opts?: Partial<Options>, cb?: (err: Error) => void): void
+  }
+
+  const npmInstallPackage: NpmInstallPackage
+
+  export = npmInstallPackage
+}

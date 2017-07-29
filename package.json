@@ -2,7 +2,7 @@
   "name": "typesearch-cli",
   "bin": "bin/cli.js",
   "version": "2.1.2",
-  "description": "Command line tool that search Type Definition for TypeScript.",
+  "description": "Command line tool that to search Type Definition from DefinitelyTyped.",
   "scripts": {
     "start": "tsc --watch",
     "test": "mocha",
@@ -15,7 +15,8 @@
   },
   "keywords": [
     "typescript",
-    "type definition"
+    "type definition",
+    "definitelytyped"
   ],
   "author": "isoden <isoda@maboroshi.biz> (http://isoden.me)",
   "license": "MIT",

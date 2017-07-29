@@ -1,7 +1,7 @@
 typesearch-cli
 ===
 
-Command line tool that search Type Definition for TypeScript.
+Command line tool that to search Type Definition from DefinitelyTyped.
 
 [![npm](https://img.shields.io/npm/v/typesearch-cli.svg?style=flat-square)](https://www.npmjs.com/packages/typesearch-cli)
 [![license](https://img.shields.io/github/license/isoden/typesearch-cli.svg?style=flat-square)](https://github.com/isoden/typesearch-cli)

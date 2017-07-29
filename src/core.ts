@@ -11,7 +11,7 @@ export const search = (searchParams: TypeSearchCli.TypeSearchParams): Promise<Ty
 
 export const normalizeParams = (params: TypeSearchCli.TypeSearchParams): TypeSearchCli.NpmSearchParams => {
   return {
-    text       : `scope: types ${ params.text }`,
+    text       : `scope:types ${ params.text }`,
     quality    : 1.95,
     popularity : 3.3,
     maintenance: 2.05,

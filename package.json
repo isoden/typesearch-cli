@@ -1,8 +1,8 @@
 {
   "name": "typesearch-cli",
   "bin": "bin/cli.js",
-  "version": "1.2.0",
-  "description": "Command line tool that search TypeScript types.",
+  "version": "2.0.0",
+  "description": "Command line tool that search Type Definition for TypeScript.",
   "scripts": {
     "start": "tsc --watch",
     "test": "mocha",
@@ -14,7 +14,8 @@
     "url": "git+https://github.com/isoden/typesearch-cli.git"
   },
   "keywords": [
-    "typescript"
+    "typescript",
+    "type definition"
   ],
   "author": "isoden <isoda@maboroshi.biz> (http://isoden.me)",
   "license": "MIT",
@@ -26,10 +27,15 @@
     "@types/meow": "^3.6.2",
     "@types/node": "^7.0.29",
     "axios": "^0.16.2",
+    "charm": "^1.0.2",
     "meow": "^3.7.0",
-    "tslib": "^1.7.1"
+    "ts-deferred": "^1.0.4",
+    "tslib": "^1.7.1",
+    "ttys": "0.0.3",
+    "visualwidth": "^0.1.0"
   },
   "devDependencies": {
+    "@types/charm": "^1.0.0",
     "@types/mocha": "^2.2.41",
     "@types/node": "^7.0.0",
     "@types/power-assert": "^1.4.29",
@@ -37,6 +43,6 @@
     "mocha": "^3.4.0",
     "power-assert": "^1.4.4",
     "tslint": "^5.4.3",
-    "typescript": "^2.3.4"
+    "typescript": "^2.4.2"
   }
 }

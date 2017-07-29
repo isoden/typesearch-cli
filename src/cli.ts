@@ -3,6 +3,7 @@
 import * as meow from 'meow'
 import * as npmInstallPackage from 'npm-install-package'
 import { search } from './index'
+import { throbber } from './throbber'
 import { onInput } from './customized-searchy'
 
 const cli = meow(`
@@ -33,9 +34,13 @@ onInput(query => search({ text: query })
     return
   }
 
+  const dispose = throbber()
+
   npmInstallPackage([pkg], {
     saveDev: true
   }, err => {
+    dispose()
+
     if (err) {
       console.error('Install failed')
       throw err

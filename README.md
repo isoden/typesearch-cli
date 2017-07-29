@@ -22,7 +22,6 @@ $ npm install typesearch-cli --global
 
 - :star2: [polm/searchy](https://github.com/polm/searchy) 
 
-## TODO
+## License
 
-- [ ] write test
-- [ ] Install from search result
+[MIT License](https://github.com/isoden/typesearch-cli/blob/master/LICENSE)

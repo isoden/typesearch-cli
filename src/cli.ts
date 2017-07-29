@@ -2,8 +2,8 @@
 
 import * as meow from 'meow'
 import * as npmInstallPackage from 'npm-install-package'
+import * as ora from 'ora'
 import { search } from './index'
-import { throbber } from './throbber'
 import { onInput } from './customized-searchy'
 
 const cli = meow(`
@@ -29,23 +29,27 @@ onInput(query => search({ text: query })
   .then(data => data.objects.map(object => object.package))
   .then(packages => packages.map(pkg => pkg.name))
 )
-.then(pkg => {
+.then(pkgName => {
   if (!cli.flags.i) {
     return
   }
 
-  const dispose = throbber()
+  const spinner = ora({
+    text : `Installing: ${ pkgName }`,
+    color: 'yellow',
+  })
+  .start()
 
-  npmInstallPackage([pkg], {
+  npmInstallPackage([pkgName], {
     saveDev: true
   }, err => {
-    dispose()
+    spinner.stop()
 
     if (err) {
-      console.error('Install failed')
+      console.error(`Install failed: ${ pkgName }`)
       throw err
     }
 
-    console.log(`Install successfully: ${ pkg }`)
+    console.log(`Install successfully: ${ pkgName }`)
   })
 })

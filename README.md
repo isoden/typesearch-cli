@@ -14,9 +14,13 @@ Command line tool that search Type Definition for TypeScript.
 $ npm install typesearch-cli --global
 ```
 
-### Usage
+## Usage
 
 ![](fixture/demo.gif)
+
+## Related
+
+- :star2: [polm/searchy](https://github.com/polm/searchy) 
 
 ## TODO
 

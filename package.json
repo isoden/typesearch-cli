@@ -1,7 +1,7 @@
 {
   "name": "typesearch-cli",
   "bin": "bin/cli.js",
-  "version": "2.1.2",
+  "version": "2.1.3",
   "description": "Command line tool that to search Type Definition from DefinitelyTyped.",
   "scripts": {
     "start": "tsc --watch",

@@ -4,6 +4,7 @@
 import * as meow from 'meow'
 import * as npmInstallPackage from 'npm-install-package'
 import * as ora from 'ora'
+import throttle = require('lodash.throttle')
 import { search } from './index'
 import { onInput } from './customized-searchy'
 
@@ -26,7 +27,7 @@ const cli = meow(`
   }
 })
 
-onInput(query => search({ text: query })
+throttle(onInput, 150)(query => search({ text: query })
   .then(data => data.objects.map(object => object.package))
   .then(packages => packages.map(pkg => pkg.name))
 )
